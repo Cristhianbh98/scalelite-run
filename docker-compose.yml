@@ -33,7 +33,7 @@ services:
     entrypoint: "/bin/sh -c 'trap exit TERM; while :; do certbot renew; sleep 12h & wait $${!}; done;'"
 
   scalelite-nginx:
-    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1}-nginx
+    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1.5.1.4}-nginx
     container_name: scalelite-nginx
     restart: unless-stopped
     ports:
@@ -52,7 +52,7 @@ services:
       - scalelite-api
 
   scalelite-api:
-    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1}-api
+    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1.5.1.4}-api
     container_name: scalelite-api
     restart: unless-stopped
     volumes:
@@ -71,7 +71,7 @@ services:
       driver: journald
 
   scalelite-poller:
-    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1}-poller
+    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1.5.1.4}-poller
     container_name: scalelite-poller
     restart: unless-stopped
     environment:
@@ -85,7 +85,7 @@ services:
       driver: journald
 
   scalelite-recording-importer:
-    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1}-recording-importer
+    image: ${SCALELITE_REPO:-blindsidenetwks}/scalelite:${SCALELITE_TAG:-v1.5.1.4}-recording-importer
     container_name: scalelite-recording-importer
     restart: unless-stopped
     environment:
