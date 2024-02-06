@@ -22,7 +22,10 @@ services:
     restart: unless-stopped
     volumes:
       - redis-data:/data
-
+      - ./data/redis/conf/redis.conf.template:/usr/local/etc/redis/redis.conf.template
+      - ./data/certbot/conf/:/etc/letsencrypt
+    command: /bin/sh -c "sed -e 's/$$HOSTNAME/${REDIS_HOST:-redis}.${DOMAIN_NAME:-user.blindside-ps.dev}/' /usr/local/etc/redis/redis.conf.template > /usr/local/etc/redis/redis.conf && exec redis-server --appendonly yes"
+    
   certbot:
     image: certbot/certbot
     container_name: certbot
